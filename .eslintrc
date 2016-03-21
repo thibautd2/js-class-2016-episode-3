@@ -1,0 +1,136 @@
+{
+  // http://eslint.org/docs/rules/
+  "extends": "eslint:recommended",
+
+  // http://eslint.org/docs/user-guide/configuring
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+  },
+
+  // http://bl.ocks.org/cletusw/e01a85e399ab563b1236
+  /* REM : http://eslint.org/docs/user-guide/configuring#configuring-rules
+    0 - turn the rule off
+    1 - turn the rule on as a warning (doesn't affect exit code)
+    2 - turn the rule on as an error (exit code is 1 when triggered)
+    */
+
+  "env": {
+    "es6": true,
+    "shared-node-browser": true,
+    "mocha": true,
+    "node": true,
+  },
+
+  "globals": {
+    "sinon": true,
+    "expect": true,
+  },
+
+  "plugins": [
+  ],
+
+
+  // http://elijahmanor.github.io/talks/js-smells/#/1/8
+  "rules": {
+
+    ////////// Possible Errors //////////
+    // http://eslint.org/docs/rules/#possible-errors
+    "comma-dangle": [2, "only-multiline"],
+    "no-console": 0, // ok to have console
+
+    ////////// Best Practices //////////
+    // http://eslint.org/docs/rules/#possible-errors
+    "complexity": [1, 7],
+    "default-case": 2,
+    "dot-notation": 2,
+/*
+    guard-for-in - make sure for-in loops have an if statement
+    no-alert - disallow the use of alert, confirm, and prompt
+    no-caller - disallow use of arguments.caller or arguments.callee
+    no-case-declarations - disallow lexical declarations in case clauses
+    no-div-regex - disallow division operators explicitly at beginning of regular expression
+    no-else-return - disallow else after a return in an if
+    no-empty-function - disallow use of empty functions
+    no-empty-pattern - disallow use of empty destructuring patterns
+    no-eq-null - disallow comparisons to null without a type-checking operator
+    no-eval - disallow use of eval()
+    no-extend-native - disallow adding to native types
+    no-extra-bind - disallow unnecessary function binding
+    no-extra-label - disallow unnecessary labels
+    no-fallthrough - disallow fallthrough of case statements
+    no-floating-decimal - disallow the use of leading or trailing decimal points in numeric literals
+    no-implicit-coercion - disallow the type conversions with shorter notations
+    no-implicit-globals - disallow var and named functions in global scope
+    no-implied-eval - disallow use of eval()-like methods
+    no-invalid-this - disallow this keywords outside of classes or class-like objects
+    no-iterator - disallow usage of __iterator__ property
+    no-labels - disallow use of labeled statements
+    no-lone-blocks - disallow unnecessary nested blocks
+    no-loop-func - disallow creation of functions within loops
+    no-magic-numbers - disallow the use of magic numbers
+    no-multi-spaces - disallow use of multiple spaces
+    no-multi-str - disallow use of multiline strings
+    no-native-reassign - disallow reassignments of native objects
+    no-new - disallow use of the new operator when not part of an assignment or comparison
+    no-new-func - disallow use of new operator for Function object
+    no-new-wrappers - disallows creating new instances of String,Number, and Boolean
+    no-octal - disallow use of octal literals
+    no-octal-escape - disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
+    no-param-reassign - disallow reassignment of function parameters
+    no-process-env - disallow use of process.env
+    no-proto - disallow usage of __proto__ property
+    no-redeclare - disallow declaring the same variable more than once
+    no-return-assign - disallow use of assignment in return statement
+    no-script-url - disallow use of javascript: urls.
+    no-self-assign - disallow assignments where both sides are exactly the same
+    no-self-compare - disallow comparisons where both sides are exactly the same
+    no-sequences - disallow use of the comma operator
+    no-throw-literal - restrict what can be thrown as an exception
+    no-unmodified-loop-condition - disallow unmodified conditions of loops
+    no-unused-expressions - disallow usage of expressions in statement position
+    no-unused-labels - disallow unused labels
+    no-useless-call - disallow unnecessary .call() and .apply()
+    no-useless-concat - disallow unnecessary concatenation of literals or template literals
+    no-void - disallow use of the void operator
+    no-warning-comments - disallow usage of configurable warning terms in comments - e.g. TODO or FIXME
+    no-with - disallow use of the with statement
+    radix - require use of the second argument for parseInt()
+    vars-on-top - require declaration of all vars at the top of their containing scope
+    wrap-iife - require immediate function invocation to be wrapped in parentheses
+    yoda - require or disallow Yoda conditions
+      */
+
+    // http://eslint.org/docs/rules/#strict-mode
+    //"strict": 2,
+
+    ////////// Variables //////////
+    // http://eslint.org/docs/rules/#variables
+    "no-shadow-restricted-names": 2,
+    "no-undef-init": 2,
+    "no-undefined": 0,
+    "no-unused-vars": 0, // XXX
+    //"no-use-before-define": 2, no, pb with function hoisted
+
+
+    ////////// Node.js and CommonJS //////////
+    // http://eslint.org/docs/rules/#nodejs-and-commonjs
+
+    ////////// Stylistic Issues //////////
+    // http://eslint.org/docs/rules/#stylistic-issues
+
+    ////////// ECMAScript 6 //////////
+    // http://eslint.org/docs/rules/#ecmascript-6
+
+    /////// Angular (plugin) ///////
+    /*"angular/typecheck-function": 0,
+        "angular/window-service": 1,
+        "angular/typecheck-function": 1,*/
+
+    // tosort
+  }
+}
