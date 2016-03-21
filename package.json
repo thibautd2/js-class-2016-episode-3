@@ -24,33 +24,21 @@
     "BABEL_OPTS": "src --out-dir build"
   },
   "scripts": {
-
     "start": "node build/server/index.js",
-
     "lint": "eslint .",
-
     "test-server": "mocha $npm_package_config_MOCHA_OPTS",
     "test-client": "karma start browser/lessons/--karma/karma.conf.js --single-run --browsers PhantomJS",
-
     "build": "babel $npm_package_config_BABEL_OPTS",
-
     "babel-node": "babel-node",
-
-    "babel-watch": "babel $npm_package_config_BABEL_OPTS --watch",
-
+    "babel-watch": "babel-watch --watch src --watch *.js src/server/index.js",
     "nodemon": "nodemon --exec npm run babel-node -- src/server/index.js",
-
     "ks": "karma start browser/lessons/--karma/karma.conf.js --auto-watch",
-
     "full-install": "npm run npm-install-globals && npm install && npm run jspm-install",
     "full-install-dev": "npm run npm-install-globals && npm run npm-install-dev && npm run jspm-install-dev",
-
     "npm-install-globals": "npm install --global jspm babel-cli nodemon && npm update -g jspm babel-cli nodemon",
     "npm-install-dev": "npm prune && npm install && npm update",
-
     "jspm-install": "jspm registry create bower jspm-bower-endpoint -y && jspm install -y",
     "jspm-install-dev": "jspm update && jspm clean && jspm install",
-
     "ii": "npm run full-install-dev",
     "xx": "rm -rf node_modules && rm -rf jspm_packages"
   },
@@ -70,6 +58,7 @@
     "express-livereload": "0.0.24",
     "forky": "0.3.0",
     "fs-extra": "^0.26.5",
+    "intl": "1.1.0",
     "intl-locales-supported": "^1.0.0",
     "lodash": "^4.6.1",
     "moment": "^2.12.0",
@@ -86,6 +75,7 @@
     "babel-cli": "6.6.5",
     "babel-preset-es2015-node5": "1.2.0",
     "babel-register": "6.7.2",
+    "babel-watch": "1.0.2",
     "chai": "3.5.0",
     "chai-as-promised": "5.2.0",
     "chai-datetime": "1.4.1",

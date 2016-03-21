@@ -21,7 +21,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
     "chai": "npm:chai@3.5.0",
-    "chai-as-promised": "npm:chai-as-promised@5.2.0",
+    "chai-as-promised": "npm:chai-as-promised@5.3.0",
     "chai-datetime": "npm:chai-datetime@1.4.1",
     "chai-jquery": "npm:chai-jquery@2.0.0",
     "chai-things": "npm:chai-things@0.2.0",
@@ -213,7 +213,7 @@ System.config({
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:chai-as-promised@5.2.0": {
+    "npm:chai-as-promised@5.3.0": {
       "chai": "npm:chai@3.5.0"
     },
     "npm:chai-datetime@1.4.1": {
@@ -482,6 +482,16 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "string_decoder": "npm:string_decoder@0.10.31"
     },
+    "npm:readable-stream@1.1.13": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "core-util-is": "npm:core-util-is@1.0.2",
+      "events": "github:jspm/nodelibs-events@0.1.1",
+      "inherits": "npm:inherits@2.0.1",
+      "isarray": "npm:isarray@0.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "stream-browserify": "npm:stream-browserify@1.0.0",
+      "string_decoder": "npm:string_decoder@0.10.31"
+    },
     "npm:readable-stream@2.0.6": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "core-util-is": "npm:core-util-is@1.0.2",
@@ -526,7 +536,7 @@ System.config({
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
-      "readable-stream": "npm:readable-stream@1.0.27-1"
+      "readable-stream": "npm:readable-stream@1.1.13"
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
