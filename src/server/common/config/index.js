@@ -1,11 +1,13 @@
 import simplyconfig from 'simplyconfig';
 
-export const config = simplyconfig.create()
+const config = simplyconfig.create({autodetect_es2015: true})
 
 	// parent
 	.add('../../../common/config')
 
 	// us
-	.add('./config.js', {pattern: 'env+local'})
+	.add('./config.js', {pattern: 'env+local'});
 
-  .get();
+// export raw data
+const config_data = config.get();
+export default config_data;

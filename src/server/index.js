@@ -9,11 +9,9 @@
 console.log('\n\n\n*** Hello from cluster master ! ***\n');
 
 require('./common/logger-setup'); // first of first
-require('./common/polyfill-intl');
+
 const config = require('./common/config');
-
-console.log('* [cluster master] config = ', global.pretty(config));
-
+console.log('* [cluster master] server config = \n' + global.pretty(config.default));
 
 const env = process.env.NODE_ENV || 'development';
 console.log('* [cluster master] env = ' + env);

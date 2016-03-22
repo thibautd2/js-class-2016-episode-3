@@ -1,8 +1,9 @@
-export const config = {
-  canonical_url: 'http://www.my-super.app/',
-  facebook_page: 'https://www.facebook.com/TODO',
-  twitter_account: '@offirmo',
-  author: 'Offirmo',
-  tab_color: '#181712', // http://bit.ly/theme-color-in-Chrome-for-Android
-};
+import simplyconfig from 'simplyconfig';
+
+const config = simplyconfig.create({autodetect_es2015: true})
+
+  // us
+  .add('./config.js', {pattern: 'env+local'});
+
+// export simplyconfig object since we're an intermediate config
 export default config;

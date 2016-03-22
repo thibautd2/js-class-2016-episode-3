@@ -3,7 +3,7 @@ import simplyconfig from 'simplyconfig';
 // https://github.com/motdotla/dotenv
 simplyconfig.dotenv.load({silent: true});
 
-export const config = simplyconfig.create()
+export const config = simplyconfig.create({autodetect_es2015: true})
 
 	// parent
 	.add('../../common/config')

@@ -10,7 +10,6 @@ import 'dustjs-helpers'; // also
 
 // https://github.com/linkedin/dustjs/wiki/Dust-Tutorial#controlling-whitespace-suppression
 dust.optimizers.format = (ctx, node) => node;
-
 dust_intl.registerWith(dust);
 
 const template_engine = consolidated_templates.dust;

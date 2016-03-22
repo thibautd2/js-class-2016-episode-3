@@ -38,6 +38,10 @@ import add_XResponseTime_header from 'response-time';
 // https://github.com/expressjs/body-parser
 
 
-module.exports = {
+// https://github.com/ericf/express-slash
+
+const middlewares = {
 
 };
+
+export default middlewares;

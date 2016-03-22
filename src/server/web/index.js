@@ -1,53 +1,38 @@
 /** State of the art web server serving an advanced AngularJS single-page web app
  */
 
-
-/************************************************************************/
 import path from 'path';
 import cluster from 'cluster';
 import http from 'http';
 
+import '../common/polyfill-intl';
+
 import _ from 'lodash';
-import pretty from 'prettyjson';
-import livereload from 'express-livereload';
+import express from 'express';
 
 import config from './config';
-import app from './express-app';
+import init_app from './express-app';
 
 /*
-var middleware = require('./middlewares');
 var utils      = require('./utils');
 var shutdown   = require('./shutdown');
 var routes     = require('./routes');
 var install_io = require('./primus');
 */
 
-console.log('* [web server] config =', pretty.render(config));
-
-
 
 /************************************************************************/
-// manual creation of the http server
-// in order to use domainMiddleware
-// cf. http://expressjs.com/4x/api.html#app.listen
+
+// manual creation of the http server + express app
+// in order to use domainMiddleware and https
+// cf. http://expressjs.com/en/4x/api.html#app.listen
+const app = express();
 const server = http.createServer(app);
 
-/************************************************************************/
-// https://www.npmjs.org/package/express-livereload
-if(config.livereload.enabled) {
-	console.log('* configuring express-livereload to watch "' + config.livereload.watched_dir + '"…');
-  livereload(app, {
-		// https://github.com/napcs/node-livereload#api-options
-		watchDir: config.livereload.watched_dir,
-		debug:    config.livereload.debug,
-		port:     config.livereload.port,
-		exts:     config.livereload.watched_extensions
-	});
-}
+init_app(server, app);
 
 
-
-install_io(server);
+// install_io(server);
 
 /************************************************************************/
 server.listen(config.listening_port, function() {

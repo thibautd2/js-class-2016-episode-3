@@ -1,6 +1,44 @@
-const package_json = require('../../../package.json');
+// since it's safer to access dev from prod than prod from dev,
+// defaults config targets dev and config.production.js specializes it to prod
 
-export const config = {
-	kill_timeout_s : 30,  //< max time we give ourselves to shutdown
-	version: package_json.version,
+
+import path from 'path';
+
+const cwd = process.cwd();
+
+const config = {
+  kill_timeout_s : 30,  //< max time we give ourselves to shutdown
+
+  web: {
+    listening_port: 7000,
+
+    strict_routing: {
+      enabled: true
+    },
+
+    // https://www.npmjs.org/package/express-livereload
+    livereload: {
+      enabled: true,
+      watched_dir: '/src/client', // optim
+      port: 35730, //< note : official default is 35729
+      watched_extensions: [ 'dust', 'html', 'css', 'js', 'png', 'gif', 'jpg' ],
+      debug: true // ?
+    },
+
+    analytics: {
+      enabled: false
+    },
+
+    // https://github.com/devoidfury/express-debug
+    express_debug_enabled: false,
+
+    dust_views_dir: 'src/client/common/views',
+    favicons_dir: 'src/client/common/root-expected-files',
+
+    primus: {
+      transformer: 'engine.io'
+    },
+  }
 };
+
+export default config;
