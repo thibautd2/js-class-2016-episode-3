@@ -4,5 +4,5 @@
     "common/**/*.js",
     "server/**/*.js"
   ],
-  "sourceMaps": true
+  "sourceMaps": "inline"
 }

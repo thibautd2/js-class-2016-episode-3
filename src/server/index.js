@@ -11,7 +11,7 @@ console.log('\n\n\n*** Hello from cluster master ! ***\n');
 require('./common/logger-setup'); // first of first
 
 const config = require('./common/config');
-console.log('* [cluster master] server config = \n' + global.pretty(config.default));
+//console.log('* [cluster master] server config = \n' + global.pretty(config.default));
 
 const env = process.env.NODE_ENV || 'development';
 console.log('* [cluster master] env = ' + env);
@@ -34,6 +34,6 @@ if(env === 'production') {
 }
 else {
   // normal, plain launch (one instance)
-  console.log('* [cluster master] SIMPLE launch...');
+  console.log('* [cluster master] NO-cluster launch...');
   require('./web/index');
 }

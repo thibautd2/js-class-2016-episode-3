@@ -1,0 +1,146 @@
+<script>
+	console.log('~~ splash : inline script body executing…');
+
+	// using portable element selectors
+	var font_detector = document.getElementById('font-load-test');
+	var error_console = document.getElementById('error-console');
+
+	setTimeout(function displayLoadingIndicator() {
+		// some action to make the user wait
+		document.querySelector('#loader progress').style.display = 'inline-block'; // back from 'none'
+	}, 3000);
+
+
+	/////// error handler ///////
+	function display_unhandled_error(errorMsg, url, lineNumber, column, errorObj) {
+		console.error('~~ onerror : ' + errorMsg +
+			' Script: ' + url +
+			' Line: ' + lineNumber +
+			' Column: ' + column +
+			' StackTrace: ' +  errorObj);
+		var p = document.createElement("p");
+		p.textContent = 'XXX ' + errorMsg;
+		error_console.appendChild(p);
+		/*ga('send', 'exception', {
+			exDescription: errorMsg,
+			exFatal: true
+		});*/
+	}
+	var original_window_on_error = window.onerror;
+	window.onerror = display_unhandled_error;
+	/////// /////// ///////
+
+
+	/////// expose splash controls ///////
+	window.offirmo_loader = {
+		stage: 0,
+		font_detector: font_detector,
+		error_console: error_console,
+		//original_window_on_error: original_window_on_error,
+		display_unhandled_error: display_unhandled_error,
+		update_pending: false // appcache is a douchebag and appcache nanny is a looser...
+	};
+
+	function change_stage(stage, force) {
+		console.log('~~ splash : moving to stage #' + stage);
+		if (stage <= window.offirmo_loader.stage && !force) return; // avoid race conditions
+		if (stage === window.offirmo_loader.stage) return; // simplify some mechanics
+
+		switch (stage) {
+			case 0:
+				/////// loader (start state)
+				break;
+
+			case 1:
+				/////// splash
+				document.getElementById('loader').style.display = 'none';
+				// splash, if any, appears immediately due to z-order
+				window.offirmo_loader.stage = 1;
+				break;
+
+			case 2:
+				/////// app
+				document.getElementById('loader').style.display = 'none'; // in case we skipped stage 1 (if very fast)
+				if (document.getElementById('splash'))
+					document.getElementById('splash').style.display = 'none';
+				window.offirmo_loader.stage = 2;
+				break;
+
+			case 3:
+				/////// updater
+				if (document.getElementById('updater'))
+					document.getElementById('updater').style.display = 'block';
+
+				// hide all other in case we skipped stage 1 (if very fast)
+				document.getElementById('loader').style.display = 'none';
+				if (document.getElementById('splash'))
+					document.getElementById('splash').style.display = 'none';
+				window.offirmo_loader.stage = 3;
+				break;
+
+			default:
+				console.error('splash : no stage #' + stage);
+				break;
+		}
+	}
+	window.offirmo_loader.change_stage = change_stage;
+	/////// /////// ///////
+
+
+	/////// auto-reloader at start ///////
+	var LOAD_TIMEOUT_MS = 20 * 1000;
+	var LAST_LOAD_RESULT_KEY = 'offirmo_loader_last_load_result';
+	function on_app_load_timeout() {
+		if (window.offirmo_loader.stage > 1) {
+			window.sessionStorage.setItem(LAST_LOAD_RESULT_KEY, 'success');
+			return;
+		}
+
+		console.warn('~~ splash : stage 0 timeout !');
+
+		var last_load = window.sessionStorage.getItem(LAST_LOAD_RESULT_KEY);
+		console.log('~~ splash : last load ended in : ' + last_load);
+
+		if (last_load !== 'failure') {
+			// attempt a reload
+			window.sessionStorage.setItem(LAST_LOAD_RESULT_KEY, 'failure');
+			window.location.reload();
+		} else {
+			// already failed...
+			console.error('~~ splash : already tried to reload, giving up...');
+		}
+	}
+	setTimeout(on_app_load_timeout, LOAD_TIMEOUT_MS);
+	/////// /////// ///////
+
+	/////// appcache helpers ///////
+	if (window.applicationCache) {
+		var is_splash_taking_care_of_update = false;
+		function onUpdateInProgress() {
+			if (! window.offirmo_loader.update_pending) {
+				console.info('~~ splash : pending update detected !');
+				window.offirmo_loader.update_pending = true;
+			}
+			if (window.offirmo_loader.stage < 2) {
+				// app is still loading, let's update immediately
+				change_stage(3); // loader
+				is_splash_taking_care_of_update = true; // we take it
+			}
+		}
+		function onUpdateReady() {
+			console.warn('~~ splash : appcache update ready !');
+			if (is_splash_taking_care_of_update) {
+				window.location.reload(true);
+			}
+		}
+		window.applicationCache.addEventListener('updateready', onUpdateReady);
+		if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+			onUpdateReady();
+		}
+		window.applicationCache.addEventListener('downloading', onUpdateInProgress);
+		window.applicationCache.addEventListener('progress', onUpdateInProgress);
+		console.info('~~ splash : appcache early listeners set.');
+	}
+	/////// /////// ///////
+
+</script>

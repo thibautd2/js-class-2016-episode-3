@@ -1,0 +1,24 @@
+<!-- errors. Should have no size when all is ok -->
+<div class="xxutility-screen" id="error-console"
+     style="position: absolute; top: 0%;">
+</div>
+
+<!-- loader screen, displayed at start while js and rsrcs loading -->
+<div class="utility-screen" id="loader">
+	<div style="width: 100%; position: absolute; bottom: 33%;">
+		<p style="font-size: 10px;">Offirmo’s</p>
+		<p style="font-size: 25px;">Online</p>
+		<p style="font-size: 30px;">Adventures</p>
+	</div>
+	<div style="width: 100%; position: absolute; top: 66%;">
+		<progress style="display: none;"></progress>
+		<br /><span id="font-load-test">Invisible 1234 ...%</span>
+	</div>
+</div>
+
+<!-- update screen  -->
+<div class="utility-screen" id="updater">
+	<div style="width: 100%; position: absolute; bottom: 33%;">
+		<p style="font-size: 20px;font-style:italic;">Update in progress…</p>
+	</div>
+</div>

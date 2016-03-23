@@ -4,8 +4,6 @@
 
 import path from 'path';
 
-const cwd = process.cwd();
-
 const config = {
   kill_timeout_s : 30,  //< max time we give ourselves to shutdown
 
@@ -30,10 +28,10 @@ const config = {
     },
 
     // https://github.com/devoidfury/express-debug
-    express_debug_enabled: false,
+    express_debug_enabled: true,
 
     dust_views_dir: 'src/client/common/views',
-    favicons_dir: 'src/client/common/root-expected-files',
+    favicons_dir: 'src/client/common/assets/root-expected-files',
 
     primus: {
       transformer: 'engine.io'

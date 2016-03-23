@@ -10,8 +10,10 @@ import '../common/polyfill-intl';
 import _ from 'lodash';
 import express from 'express';
 
-import config from './config';
+import config from '../common/config';
 import init_app from './express-app';
+import getLocalIps from '../common/incubator/local-ips';
+
 
 /*
 var utils      = require('./utils');
@@ -31,14 +33,12 @@ const server = http.createServer(app);
 
 init_app(server, app);
 
-
 // install_io(server);
 
 /************************************************************************/
-server.listen(config.listening_port, function() {
+// TODO lesten to more server events !
+server.listen(config.web.listening_port, function() {
 	console.log('* Now listening on :');
-	/*_.forEach(utils.get_local_ips(), function(ip) {
-		logger.log('  http://' + ip + ':' + config.listening_port);
-	});*/
-	console.log('(Ctrl+C to stop)');
+  getLocalIps().forEach(ip => console.log('  http://' + ip + ':' + config.web.listening_port));
+	console.log('  (Ctrl+C to stop)');
 });

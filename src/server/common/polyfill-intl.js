@@ -2,8 +2,7 @@
 // http://formatjs.io/guides/runtime-environments/#server
 console.log('* [intl polyfill] on-demand setup...');
 
-import app_infos from '../../common/static-data/app-infos';
-console.log('* [intl polyfill] app infos :\n' + global.pretty(app_infos));
+import app_infos from '../../common/static_data/app_infos';
 
 var app_supported_locales = app_infos.supported_locales;
 
@@ -14,8 +13,8 @@ if (global.Intl) {
     // polyfill and replace the constructors with need with the polyfill's.
     console.log('* [intl polyfill] polyfilling partial intl...');
     const Intl_polyfill = require('intl');
-    Intl.NumberFormat   = Intl_polyfill.NumberFormat;
-    Intl.DateTimeFormat = Intl_polyfill.DateTimeFormat;
+    global.Intl.NumberFormat   = Intl_polyfill.NumberFormat;
+    global.Intl.DateTimeFormat = Intl_polyfill.DateTimeFormat;
   }
   else
     console.log('* [intl polyfill] no needed.');

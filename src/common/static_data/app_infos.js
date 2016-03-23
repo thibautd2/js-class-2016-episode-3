@@ -13,3 +13,5 @@ const app_infos = {
 };
 
 export default app_infos;
+
+//console.log('* [app infos] :\n' + global.pretty(app_infos));
