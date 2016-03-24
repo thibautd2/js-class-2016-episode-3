@@ -1,4 +1,4 @@
-import is_page_request from '../../../common/incubator/is-page-request';
+import is_page_request from '../../../incubator/is-page-request';
 
 
 // REM a "4 parameters" middleware is recognized as an error handler

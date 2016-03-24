@@ -5,14 +5,14 @@ import path from 'path';
 import cluster from 'cluster';
 import http from 'http';
 
-import '../common/polyfill-intl';
+import '../utils/polyfill-intl';
 
 import _ from 'lodash';
 import express from 'express';
 
-import config from '../common/config';
+import config from '../config';
 import init_app from './express-app';
-import getLocalIps from '../common/incubator/local-ips';
+import getLocalIps from '../incubator/local-ips';
 
 
 /*
@@ -36,7 +36,7 @@ init_app(server, app);
 // install_io(server);
 
 /************************************************************************/
-// TODO lesten to more server events !
+// TODO listen to more server events !
 server.listen(config.web.listening_port, function() {
 	console.log('* Now listening on :');
   getLocalIps().forEach(ip => console.log('  http://' + ip + ':' + config.web.listening_port));

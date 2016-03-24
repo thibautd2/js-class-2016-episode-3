@@ -58,7 +58,7 @@ import morgan from 'morgan';
 
 ////////////////////////////////////////////////////////////////////////
 
-import config from '../../../common/config';
+import config from '../../../config';
 import app_infos from '../../../../common/static_data/app_infos';
 
 const cwd = process.cwd();
@@ -68,7 +68,9 @@ function create(server, app) {
 
   ////////////////////////////////////
 
-  // special tool ! If used, will automatically attach itself as a middleware (!)
+  // special tool ! If used
+  // - will automatically attach itself as a middleware (!)
+  // - require at last one existing middleware already set (!)
   if(config.web.express_debug_enabled)
     express_debug(app, { /* settings */ });
 

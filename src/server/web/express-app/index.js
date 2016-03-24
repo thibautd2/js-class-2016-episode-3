@@ -1,7 +1,7 @@
-import config from '../../common/config';
+import config from '../../config';
 import template_engine from './template_engine';
 import create_middlewares from './middlewares';
-import routes from './routes';
+import routes from '../routes';
 
 const cwd = process.cwd();
 

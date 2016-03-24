@@ -11,7 +11,7 @@ const config = {
     listening_port: 7000,
 
     strict_routing: {
-      enabled: true
+      enabled: false
     },
 
     // https://www.npmjs.org/package/express-livereload

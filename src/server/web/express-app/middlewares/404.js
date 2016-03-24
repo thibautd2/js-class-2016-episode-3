@@ -1,4 +1,4 @@
-import is_page_request from '../../../common/incubator/is-page-request';
+import is_page_request from '../../../incubator/is-page-request';
 
 // http://stackoverflow.com/questions/6528876/how-to-redirect-404-errors-to-a-page-in-expressjs
 // Several cases :

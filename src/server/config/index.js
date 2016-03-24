@@ -3,7 +3,7 @@ import simplyconfig from 'simplyconfig';
 const config = simplyconfig.create({autodetect_es2015: true})
 
 	// parent
-	.add('../../../common/config')
+	.add('../../common/config')
 
 	// us
 	.add('./config.js', {pattern: 'env+local'});

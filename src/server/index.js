@@ -8,9 +8,9 @@
 
 console.log('\n\n\n*** Hello from cluster master ! ***\n');
 
-require('./common/logger-setup'); // first of first
+require('./utils/logger-setup'); // first of first
 
-const config = require('./common/config');
+const config = require('./config');
 //console.log('* [cluster master] server config = \n' + global.pretty(config.default));
 
 const env = process.env.NODE_ENV || 'development';

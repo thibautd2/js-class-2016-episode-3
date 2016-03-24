@@ -1,0 +1,14 @@
+@import '/client/common/common.css';
+
+body
+{
+	font-family: "RobotoRegular", "Lucida Sans Unicode", "Lucida Grande", "sans-serif";
+}
+
+div#content {
+	padding: 0px 10px;
+}
+
+.dyn {
+	color: #8f0000;
+}
