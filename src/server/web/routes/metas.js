@@ -1,14 +1,11 @@
 import express from 'express';
 
-import diagnostic_routes from '../../../common/static_data/app_infos';
+import diagnostic_routes from '../../incubator/meta-routes';
+import app_infos from '../../../common/static_data/app_infos';
 
 const router = new express.Router();
 export default router;
 
-router.get('/x', (req, res) => res.send('hello meta'));
-router.get('/meta', (req, res) => res.send('hello meta 2'));
-
-/*
 router.get('/', (req, res) => {
   res.send(`
 <!DOCTYPE html>
@@ -38,7 +35,7 @@ router.get('/', (req, res) => {
 	`);
 });
 
-router.get('/diagnostic', diagnostic_routes);
+router.get('/diagnostics', diagnostic_routes);
 
 router.get('/locale_test', (req, res) => {
   res.header('Content-Type', 'text/plain');
@@ -56,4 +53,3 @@ router.get('/config', function(req, res) {
   res.header('Content-Type', 'application/json');
   res.send(config);
 });
-*/
