@@ -16,9 +16,14 @@ System.config({
   },
 
   map: {
+    "angular": "github:angular/bower-angular@1.5.2",
+    "angular-animate": "github:angular/bower-angular-animate@1.5.2",
+    "angular-aria": "github:angular/bower-angular-aria@1.5.2",
+    "angular-material": "github:angular/bower-material@1.0.6",
+    "angular-messages": "github:angular/bower-angular-messages@1.5.2",
     "async": "npm:async@1.5.2",
-    "babel": "npm:babel-core@5.8.35",
-    "babel-runtime": "npm:babel-runtime@5.8.35",
+    "babel": "npm:babel-core@5.8.38",
+    "babel-runtime": "npm:babel-runtime@5.8.38",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
     "chai": "npm:chai@3.5.0",
     "chai-as-promised": "npm:chai-as-promised@5.3.0",
@@ -32,6 +37,7 @@ System.config({
     "d3": "bower:d3@3.4.13",
     "d3kit": "bower:d3kit@1.0.9",
     "d3kit-timeline": "bower:d3kit-timeline@0.4.1",
+    "handsontable/handsontable": "github:handsontable/handsontable@0.23.0",
     "jquery": "npm:jquery@2.2.2",
     "json": "github:systemjs/plugin-json@0.1.0",
     "lodash": "npm:lodash@4.6.1",
@@ -46,6 +52,21 @@ System.config({
     },
     "bower:d3kit@1.0.9": {
       "d3": "bower:d3@3.4.13"
+    },
+    "github:angular/bower-angular-animate@1.5.2": {
+      "angular": "github:angular/bower-angular@1.5.2"
+    },
+    "github:angular/bower-angular-aria@1.5.2": {
+      "angular": "github:angular/bower-angular@1.5.2"
+    },
+    "github:angular/bower-angular-messages@1.5.2": {
+      "angular": "github:angular/bower-angular@1.5.2"
+    },
+    "github:angular/bower-material@1.0.6": {
+      "angular": "github:angular/bower-angular@1.5.2",
+      "angular-animate": "github:angular/bower-angular-animate@1.5.2",
+      "angular-aria": "github:angular/bower-angular-aria@1.5.2",
+      "css": "github:systemjs/plugin-css@0.1.20"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -143,7 +164,7 @@ System.config({
     "npm:async@1.5.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:babel-runtime@5.8.35": {
+    "npm:babel-runtime@5.8.38": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:bn.js@4.11.0": {
