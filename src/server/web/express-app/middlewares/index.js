@@ -1,27 +1,23 @@
 import path from 'path';
 
 ///////////////// middlewares modules /////////////////
+// https://blog.jscrambler.com/setting-up-5-useful-middlewares-for-an-express-api/
 
 // TODO logger winston
 
 // live-reload client each time client files change
 // https://www.npmjs.org/package/express-livereload
-import livereload from 'express-livereload';
-
-// favicon serving middleware
-// https://github.com/expressjs/serve-favicon
-// (static-favicon is an alias)
-import serve_favicon from 'serve-favicon';
+import client_livereload from 'express-livereload';
 
 // Serve static files
 // http://expressjs.com/en/4x/api.html#express.static
 import {static as serve_static_files} from 'express';
 
 // activate file compression
-import compression from 'compression';
+import compress_response_body from 'compression';
 
 // add a unique uid to each requests
-import uuid from 'connect-uuid';
+import assign_uuid from 'connect-uuid';
 
 // Serve directory listings
 // https://github.com/expressjs/serve-index
@@ -54,7 +50,7 @@ import express_debug from 'express-debug';
 import handle_errors from './error';
 import fallback_to_404 from './404';
 
-import morgan from 'morgan';
+import logger from 'morgan';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -76,7 +72,7 @@ function create(server, app) {
 
   ////////////////////////////////////
 
-  middlewares.logger = morgan('dev'); // TODO
+  middlewares.log_requests = logger('dev'); // TODO
 
   ////////////////////////////////////
 
@@ -85,7 +81,7 @@ function create(server, app) {
   // - will automatically attach itself as a middleware (!)
   if(config.web.livereload.enabled) {
     console.log('* using express-livereload watching "' + config.web.livereload.watched_dir + '"…');
-    livereload(app, {
+    client_livereload(app, {
       // options are documented in the underlying module :
       // https://github.com/napcs/node-livereload#api-options
       watchDir: config.web.livereload.watched_dir,
@@ -94,12 +90,6 @@ function create(server, app) {
       exts: config.web.livereload.watched_extensions
     });
   }
-
-  ////////////////////////////////////
-
-  middlewares.serve_favicon = serve_favicon(
-    path.join(config.web.favicons_dir, '/favicon.ico')
-  );
 
   ////////////////////////////////////
   middlewares.detect_best_locale = locale(
@@ -116,10 +106,10 @@ function create(server, app) {
   ////////////////////////////////////
 
   middlewares.add_response_time_header = response_time();
-  middlewares.compress_response_body = compression();
-  middlewares.affect_uuid = uuid();
+  middlewares.compress_response_body = compress_response_body();
+  middlewares.assign_uuid = assign_uuid();
   middlewares.handle_errors = handle_errors;
-  middlewares.fallback_to_404 = fallback_to_404;
+  middlewares.handle_unmatched_with_404 = fallback_to_404;
 
   ////////////////////////////////////
 

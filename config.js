@@ -21,6 +21,7 @@ System.config({
     "angular-aria": "github:angular/bower-angular-aria@1.5.2",
     "angular-material": "github:angular/bower-material@1.0.6",
     "angular-messages": "github:angular/bower-angular-messages@1.5.2",
+    "angular-ui-router": "github:angular-ui/ui-router@0.2.18",
     "async": "npm:async@1.5.2",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
@@ -52,6 +53,9 @@ System.config({
     },
     "bower:d3kit@1.0.9": {
       "d3": "bower:d3@3.4.13"
+    },
+    "github:angular-ui/ui-router@0.2.18": {
+      "angular": "github:angular/bower-angular@1.5.2"
     },
     "github:angular/bower-angular-animate@1.5.2": {
       "angular": "github:angular/bower-angular@1.5.2"

@@ -46,19 +46,17 @@ function init_app(server, app) {
   const middlewares = create_middlewares(server, app);
 
   // tag the requests with a unique id
-  app.use(middlewares.affect_uuid);
+  app.use(middlewares.assign_uuid);
 
   // log requests
-  app.use(middlewares.logger);
-
-  // Typically this middleware will come very early in your stack (maybe even first)
-  // to avoid processing any other middleware if we already know the request is for /favicon.ico
-  app.use(middlewares.serve_favicon);
+  app.use(middlewares.log_requests);
 
   // activate compression
   app.use(middlewares.compress_response_body);
 
   // then static files which doesn't require special processing.
+  // Typically this middleware will come very early in the stack
+  // to avoid processing any other middleware if we already know the request is for a static file
   // TODO path.join(cwd,
   app.use('/',              middlewares.serve_static_files( config.web.favicons_dir ));
   app.use('/client',        middlewares.serve_static_files('src/client'));
@@ -85,7 +83,7 @@ function init_app(server, app) {
 
   // fallback
   // 'catch all' = default / 404 for a webapp
-  app.use(middlewares.fallback_to_404);
+  app.use(middlewares.handle_unmatched_with_404);
 
   /************************************************************************/
   // error handling at the end

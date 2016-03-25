@@ -2,6 +2,7 @@ import express from 'express';
 
 import diagnostic_routes from '../../incubator/meta-routes';
 import app_infos from '../../../common/static_data/app_infos';
+import config from '../../config';
 
 const router = new express.Router();
 export default router;

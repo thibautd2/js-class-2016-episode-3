@@ -1,0 +1,15 @@
+{
+	"env": {
+		"browser": true,
+    "amd": true,
+	},
+
+  "globals": {
+    "angular": true,
+    "global_ng_module": true,
+  },
+
+  "plugins": [
+    //"angular" // https://github.com/Gillespie59/eslint-plugin-angular
+  ],
+}
