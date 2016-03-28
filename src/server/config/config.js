@@ -24,11 +24,7 @@ const config = {
       dir: 'src/client',
       default: 'landing'
     },
-
-    strict_routing: {
-      enabled: false
-    },
-
+    
     morgan: {
       // see morgan middleware doc
       upfront_format:

@@ -5,9 +5,6 @@ import template_engine from './template_engine';
 import create_middlewares from './middlewares';
 import routes from '../routes';
 
-const cwd = process.cwd(); // TODO useful ?
-
-
 function init_app(server, app) {
 
   /********************************** App **************************************/
@@ -25,7 +22,7 @@ function init_app(server, app) {
   app.set('views', config.web.dust_views_dir); // default extension to use when omitted
 
   // Because you're the type of developer who cares about this sort of thing ;-)
-  if (config.web.strict_routing.enabled) {
+  if (config.strict_routing.enabled) {
     app.enable('strict routing'); // default false
     app.enable('case sensitive routing'); // default false
     // see also middleware : express-slash
@@ -51,7 +48,6 @@ function init_app(server, app) {
   // identify requests rendering to a page from others (xhr, api...)
   app.use(middlewares.identify_page_requests);
 
-  // log requests
   app.use(middlewares.log_requests);
 
   // activate compression
@@ -60,7 +56,6 @@ function init_app(server, app) {
   // then static files which doesn't require special processing.
   // Typically this middleware will come very early in the stack
   // to avoid processing any other middleware if we already know the request is for a static file
-  // TODO path.join(cwd,
   app.use('/',              middlewares.serve_static_files( config.web.favicons_dir ));
   app.use('/client',        middlewares.serve_static_files('src/client'));
   app.use('/common',        middlewares.serve_static_files('src/common'));
@@ -76,13 +71,9 @@ function init_app(server, app) {
 
   //app.use(bodyParser.json());
   //app.use(bodyParser.urlencoded());
-
-  // It is very important that this module is used before any module
-  // that needs to know the method of the request
-  //app.use(require('method-override')()); // https://github.com/expressjs/method-override
-
-
+  
   /********************************** routes **************************************/
+  
   app.use(routes);
 
   // fallback
@@ -90,6 +81,7 @@ function init_app(server, app) {
   app.use(middlewares.handle_unmatched_with_404);
 
   /************************************************************************/
+  
   // error handling at the end
   // "Though not mandatory error-handling middleware are typically defined very last,
   //  below any other app.use() calls"

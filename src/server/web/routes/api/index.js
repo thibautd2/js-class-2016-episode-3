@@ -8,4 +8,9 @@ export default router;
 
 /////// attach all apis ///////
 
+
+// It is very important that this module is used before any module
+// that needs to know the method of the request
+//app.use(require('method-override')()); // https://github.com/expressjs/method-override
+
 router.get('/', (req, res) => res.send('API TODO'));
