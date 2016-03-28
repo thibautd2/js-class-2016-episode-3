@@ -1,6 +1,7 @@
 //console.log('loading landing app main js...');
 
 import 'angular';
+import 'angular-ui-router';
 import 'angular-aria';
 import 'angular-animate';
 import 'angular-messages';
@@ -10,7 +11,7 @@ import 'angular-material/angular-material.layouts.css!';
 
 import app from 'client/common/incubator/ng-app-bootstrap';
 
-app.global_ng_module_dependencies = ['ngAria', 'ngAnimate', 'ngMessages', 'ngMaterial'];
+app.global_ng_module_dependencies = ['ui.router', 'ngAria', 'ngAnimate', 'ngMessages', 'ngMaterial'];
 
 //const ng_module = app.global_ng_module; // singleton : access cause creation
 
@@ -26,5 +27,6 @@ window._app.global_ng_module.controller('AppController', ['$scope', function ($s
 // use more convenient AMD syntax
 require([
   'client/landing/lib/ng/components/content',
+  'client/landing/lib/ng/routes/index',
   'client/landing/index.css!'
 ], app.bootstrap);
