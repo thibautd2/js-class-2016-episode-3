@@ -4,7 +4,7 @@
 export default function on_express_error (err, req, res, next) {
 
   // TODO logger winston
-  console.warn('1st error handler', err, err.stack);
+  console.warn('1st error handler', err.stack);
 
   // so we have an error. Do we have a status hint ?
   const status = err.status || 500; // TODO validate err.status
@@ -30,15 +30,9 @@ export default function on_express_error (err, req, res, next) {
   }
 
   // eventually
-  try {
-    res.render('error', {
-      tpl: 'error',
-      error: err, // TODO filter fields for safety !
-      uuid: req.uuid
-    });
-  }
-  catch(e) {
-    console.error('! The error template didn´t work :', e);
-    res.send(500, 'Something broke and the nice error template didn´t work !');
-  }
+  res.render('error', {
+    tpl: 'error',
+    error: err, // TODO filter fields for safety !
+    uuid: req.uuid
+  });
 }

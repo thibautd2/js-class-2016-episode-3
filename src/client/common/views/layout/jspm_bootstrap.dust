@@ -1,0 +1,16 @@
+
+{! Different code for prod and dev mode !}
+{?jsminification_enabled}
+  TODO !!!
+
+{:else}
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script>
+  window.define = System.amdDefine;
+  window.require = window.requirejs = System.amdRequire;
+  System.import('client/landing/index');
+</script>
+
+{/jsminification_enabled}

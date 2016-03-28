@@ -1,3 +1,5 @@
+import path from 'path';
+
 import config from '../../config';
 import template_engine from './template_engine';
 import create_middlewares from './middlewares';
@@ -36,6 +38,9 @@ function init_app(server, app) {
   // TOREVIEW
   app.locals.showErrorStackTrace = config.debug_infos_activated;
 
+  // TOREVIEW
+  app.set('cache', false);
+
   /********************************** Middlewares **************************************/
 
   const middlewares = create_middlewares(server, app);
@@ -60,6 +65,7 @@ function init_app(server, app) {
   app.use('/client',        middlewares.serve_static_files('src/client'));
   app.use('/common',        middlewares.serve_static_files('src/common'));
   app.use('/jspm_packages', middlewares.serve_static_files('jspm_packages'));
+  app.get('/config.js', (req, res) => res.sendFile('config.js', { root: process.cwd()}));
 
   // now that we've passed static data which may be CDN'd or served by a reverse proxy,
   // add the X-Response-Time header to our responses

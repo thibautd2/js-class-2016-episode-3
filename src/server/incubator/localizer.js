@@ -11,7 +11,7 @@ var _ = require('lodash');
  */
 
 function localizer_factory(supported_locales, options) {
-	console.log('* Locale negotiator middleware : supported_locales =', supported_locales);
+	console.log('* [Locale negotiator middleware] supported_locales =', supported_locales);
 	if(! _.isArray(supported_locales)) throw new Error('localizer.js : supported_locales must be an array !');
 	if(_.isEmpty(supported_locales)) throw new Error('localizer.js : supported_locales can’t be empty !');
 

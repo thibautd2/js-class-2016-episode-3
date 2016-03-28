@@ -7,6 +7,7 @@
  */
 
 console.log('\n\n*** Hello from cluster master ! ***');
+console.log('(Ctrl+C to stop)');
 
 require('./utils/logger-setup'); // first of first
 

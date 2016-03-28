@@ -1,4 +1,4 @@
-import path from 'path';
+import _ from 'lodash';
 
 ///////////////// middlewares modules /////////////////
 // https://blog.jscrambler.com/setting-up-5-useful-middlewares-for-an-express-api/
@@ -61,6 +61,56 @@ const cwd = process.cwd();
 
 function create(server, app) {
   const middlewares = {};
+
+  app.use((req, res, next) => {
+    res.original_render = res.render;
+
+    res.render = function(view, locals, cb) {
+      if (_.isFunction(locals)) {
+        cb = locals;
+        locals = undefined;
+      }
+
+      console.log('* rendering template "' + view + '"...');
+      //console.log(global.pretty(locals));
+      let sent = false;
+
+      const rendering_watchdog = setTimeout(function rendering_fallback() {
+        console.error('! "' + view + '" template rendering timeout !');
+
+        // avoid loops
+        if (view === 'error')
+          res.type('txt').send('Internal error');
+        else
+          next(new Error('Template rendering error !'));
+        sent = true;
+      }, (config.web.response_timeout_s - 1) * 1000);
+
+      res.original_render(view, locals, (err, html) => {
+        clearTimeout(rendering_watchdog);
+
+        if (err) {
+          console.error('! "' + view + '" template rendering error !', err);
+
+          // avoid loops
+          if (view === 'error')
+            return res.type('txt').send('Internal error');
+          else
+            return next(err);
+        }
+
+        //console.log('* template "' + view + '" rendered.');
+
+        if (sent)
+          console.error('! "' + view + '" template rendered too late !');
+        else
+          res.send(html);
+      });
+    };
+
+    //console.log('* template debug attached to response object.');
+    next();
+  });
 
   ////////////////////////////////////
 
