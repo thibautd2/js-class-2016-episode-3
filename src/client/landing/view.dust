@@ -9,10 +9,7 @@
 
 {<content}
 
-  Landing !
-
-	<div id="content" content-directive>
-	</div>
+	<content></content>
 
   {>"layout/jspm_bootstrap" /}
 

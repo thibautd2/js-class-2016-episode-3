@@ -38,10 +38,15 @@ ng_module.controller('LandingController', ['$scope', ($scope) => {
   console.info('LandingController initialized.');
 }]);
 
-// angular manual initialisation since we use a script loader
-// cf. http://docs.angularjs.org/guide/bootstrap
-console.log('Bootstrapping angular...');
-// we must bind on document to encompass page title
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ['global_ng_module'], {strictDi: true});
-});
+// use more convenient AMD syntax
+require([
+  'client/landing/content'
+], () => {
+  // angular manual initialisation since we use a script loader
+  // cf. http://docs.angularjs.org/guide/bootstrap
+  console.log('Bootstrapping angular...');
+  // we must bind on document to encompass page title
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, ['global_ng_module'], {strictDi: true});
+  });
+})
