@@ -2,7 +2,7 @@ import express from 'express';
 
 import config from '../../config';
 
-import meta_routes from './metas';
+import meta_routes from './meta';
 
 const router = new express.Router();
 export default router;

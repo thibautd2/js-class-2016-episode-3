@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 	res.send(`
 <!DOCTYPE html>
 <head>
-	<title>meta routes</title>
+	<title>Test routes</title>
 	<style type="text/css">
 		body {
 			margin: 40px;
@@ -28,14 +28,15 @@ router.get('/', (req, res) => {
 </head>
 
 <h1>...</h1>
+<li><a>${req.baseUrl}/404</a> non-existing page
 <li><a>${req.baseUrl}/ping</a>
-<li><a>${req.baseUrl}/echo</a>
-<li><a>${req.baseUrl}/runtime-error-direct</a>
-<li><a>${req.baseUrl}/sync-error</a>
-<li><a>${req.baseUrl}/runtime-error-next</a>
-<li><a>${req.baseUrl}/async-error</a>
-<li><a>${req.baseUrl}/timeout</a>
-<li><a>${req.baseUrl}/timeout/3</a> (duration in s)
+<li><a>${req.baseUrl}/echo?</a>
+<li><a>${req.baseUrl}/runtime-error-direct</a> error handled directly by the route
+<li><a>${req.baseUrl}/runtime-error-next</a> synchronous error passed to next()
+<li><a>${req.baseUrl}/sync-error</a> unhandled synchronous error thrown in route
+<li><a>${req.baseUrl}/async-error</a> unhandled asynchronous error thrown in route
+<li><a>${req.baseUrl}/timeout</a> page doesn't render
+<li><a>${req.baseUrl}/timeout/3</a> (duration in s) page renders after given duration
 
 <script>
 	document.querySelector('h1').textContent = document.title;
@@ -51,6 +52,7 @@ router.get('/ping', function (req, res) {
 });
 
 router.get('/echo', function (req, res) {
+  // TODO req query
 	res.send('pong');
 });
 

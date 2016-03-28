@@ -1,44 +1,38 @@
 /** State of the art web server serving an advanced AngularJS single-page web app
  */
 
-import path from 'path';
-import cluster from 'cluster';
 import http from 'http';
 
 import '../utils/polyfill-intl';
 
-import _ from 'lodash';
 import express from 'express';
 
 import config from '../config';
-import init_app from './express-app';
-import getLocalIps from '../incubator/local-ips';
+import init_express_app from './express-app';
+import get_local_ips from '../incubator/local-ips';
 
 
-/*
-var utils      = require('./utils');
+/* TODO
 var shutdown   = require('./shutdown');
-var routes     = require('./routes');
 var install_io = require('./primus');
 */
 
 
 /************************************************************************/
 
-// manual creation of the http server + express app
-// in order to use domainMiddleware and https
+// manual simultaneous creation of the http server + express app
+// in order to be able to use https
 // cf. http://expressjs.com/en/4x/api.html#app.listen
 const app = express();
 const server = http.createServer(app);
 
-init_app(server, app);
-
-// install_io(server);
+init_express_app(server, app);
+// TODO install_io(server);
 
 /************************************************************************/
 // TODO listen to more server events !
 server.listen(config.web.listening_port, function() {
 	console.log('* Now listening on :');
-  getLocalIps().forEach(ip => console.log('  http://' + ip + ':' + config.web.listening_port));
-	console.log('  (Ctrl+C to stop)');
+  get_local_ips().forEach(ip => console.log('  http://' + ip + ':' + config.web.listening_port));
+	console.log('(Ctrl+C to stop)');
 });

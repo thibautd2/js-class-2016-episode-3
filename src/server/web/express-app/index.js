@@ -3,7 +3,7 @@ import template_engine from './template_engine';
 import create_middlewares from './middlewares';
 import routes from '../routes';
 
-const cwd = process.cwd();
+const cwd = process.cwd(); // TODO useful ?
 
 
 function init_app(server, app) {
@@ -26,27 +26,25 @@ function init_app(server, app) {
   if (config.web.strict_routing.enabled) {
     app.enable('strict routing'); // default false
     app.enable('case sensitive routing'); // default false
+    // see also middleware : express-slash
   }
 
   // to review : for running behind nginx or equiv.
   //app.enable('trust proxy');
 
-  // TODO
   // useful to know if we want to display stack errors to the user
-  //app.locals.showErrorStackTrace = config.get('showErrorStackTrace');
+  // TOREVIEW
+  app.locals.showErrorStackTrace = config.debug_infos_activated;
 
   /********************************** Middlewares **************************************/
-
-  // add an empty middleware for some bogus tools that require at last one :-(
-  app.use((req, res, next) => {
-    console.log('seen something...');
-    next()
-  });
 
   const middlewares = create_middlewares(server, app);
 
   // tag the requests with a unique id
   app.use(middlewares.assign_uuid);
+
+  // identify requests rendering to a page from others (xhr, api...)
+  app.use(middlewares.identify_page_requests);
 
   // log requests
   app.use(middlewares.log_requests);

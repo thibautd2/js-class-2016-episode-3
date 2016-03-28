@@ -1,3 +1,19 @@
-Not found ! (TODO improve)
-<br/>
-<a href="/">Back to home</a>
+<!DOCTYPE html>
+<head>
+    <title>404 Not found</title>
+    <style type="text/css">
+        body {
+            margin: 40px;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            color: #333;
+        }
+    </style>
+</head>
+
+<h1>Page not found.</h1>
+<li>Check url in the adress bar
+<li><a href="/">Go back to home</a>
+
+<hr />
+<pre>{url}</pre>
+<pre>#{uuid}</pre>

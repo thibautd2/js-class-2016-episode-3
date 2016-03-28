@@ -1,3 +1,28 @@
-Hello from the error template ! (TODO improve)
-<br/>
-Error is "{error.message}"
+<!DOCTYPE html>
+<head>
+    <title>Error</title>
+    <style type="text/css">
+        body {
+            margin: 40px;
+            font-family: "Consolas", "Lucida console", monospace;
+            color: #333;
+        }
+    </style>
+</head>
+
+<h1>Error...</h1>
+<p>
+  Something wrong happened. The technical team has been notified.
+</p>
+
+<p>
+  You can :
+  <li><a href="/">Go back to home</a>
+  <li>Try again later
+</p>
+
+<hr />
+<pre>{error.name}</pre>
+<pre>{error.message}</pre>
+<pre>{error.stack}</pre>
+<pre>#{uuid}</pre>

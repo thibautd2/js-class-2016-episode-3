@@ -1,23 +1,22 @@
-import is_page_request from '../../../incubator/is-page-request';
 
 
-// REM a "4 parameters" middleware is recognized as an error handler
+// REM : a "4 parameters" middleware is recognized as an error handler
 export default function on_express_error (err, req, res, next) {
-  console.warn('1st error handler', err, err.stack);
-  //logger.exception(err);
 
-  // so we have an error. Do we have a status ?
-  const status = err.status || 500;
-  // (todo validate err.status)
+  // TODO logger winston
+  console.warn('1st error handler', err, err.stack);
+
+  // so we have an error. Do we have a status hint ?
+  const status = err.status || 500; // TODO validate err.status
   res.status(status);
 
-  if (! is_page_request(req)) {
+  if (! req.is_page_request) {
     // Will not be seen by the user.
     // Respond the best we can.
     if (req.accepts('json'))
-      return res.send({ error: 'server error : ' + status + ' (as json)' });
+      return res.send({ error: 'server error : ' + status });
     else
-      return res.type('txt').send('server error : ' + status + ' (as text)');
+      return res.type('txt').send('server error : ' + status);
   }
 
   // ok, most likely a user browsing.
@@ -32,10 +31,14 @@ export default function on_express_error (err, req, res, next) {
 
   // eventually
   try {
-    res.render('error', { tpl: 'error', error: err });
+    res.render('error', {
+      tpl: 'error',
+      error: err, // TODO filter fields for safety !
+      uuid: req.uuid
+    });
   }
   catch(e) {
-    console.error('The error template didn´t work :', e);
+    console.error('! The error template didn´t work :', e);
     res.send(500, 'Something broke and the nice error template didn´t work !');
   }
 }

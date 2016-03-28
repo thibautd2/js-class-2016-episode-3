@@ -2,6 +2,12 @@
  */
 
 export default function is_page_request (req) {
-  return    (! req.xhr) // caller manually told us it was a xhr
-         && (req.accepts('html')); // most likely a browser asset
+
+  if (req.xhr) // caller manually told us it was a xhr
+    return false;
+
+  if (req.accepts('html')) // most likely a browser asset
+    return true;
+
+  return true; // by default, assume a user will see that request, safer.
 }

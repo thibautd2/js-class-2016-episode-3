@@ -1,6 +1,6 @@
 import express from 'express';
 
-import diagnostic_routes from '../../incubator/meta-routes';
+import diagnostic_routes from '../../incubator/test-routes';
 import app_infos from '../../../common/static_data/app_infos';
 import config from '../../config';
 
@@ -22,10 +22,10 @@ router.get('/', (req, res) => {
 </head>
 
 <h1>...</h1>
-<li><a>${req.baseUrl}/diagnostics</a>
-<li><a>${req.baseUrl}/locale_test</a>
 <li><a>${req.baseUrl}/config</a>
-<li><a>${req.baseUrl}/../express-debug</a>
+<li><a>${req.baseUrl}/locale_test</a>
+<li><a>${req.baseUrl}/tests</a>
+<li><a>${req.baseUrl}/../express-debug</a> (served by express-debug middleware)
 
 <script>
 	document.querySelector('h1').textContent = document.title;
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 	`);
 });
 
-router.get('/diagnostics', diagnostic_routes);
+router.use('/tests', diagnostic_routes);
 
 router.get('/locale_test', (req, res) => {
   res.header('Content-Type', 'text/plain');

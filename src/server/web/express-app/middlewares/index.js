@@ -3,8 +3,6 @@ import path from 'path';
 ///////////////// middlewares modules /////////////////
 // https://blog.jscrambler.com/setting-up-5-useful-middlewares-for-an-express-api/
 
-// TODO logger winston
-
 // live-reload client each time client files change
 // https://www.npmjs.org/package/express-livereload
 import client_livereload from 'express-livereload';
@@ -19,38 +17,40 @@ import compress_response_body from 'compression';
 // add a unique uid to each requests
 import assign_uuid from 'connect-uuid';
 
+// adds a X-Response-Time header to responses.
+// https://github.com/expressjs/response-time
+import response_time from 'response-time';
+
+// locale negotiation
+import locale_detector from '../../../incubator/localizer';
+
+// "express debug toolbar"
+// https://github.com/devoidfury/express-debug
+import express_debug from 'express-debug';
+
+import is_page_request from '../../../incubator/is-page-request';
+
 // Serve directory listings
 // https://github.com/expressjs/serve-index
 // TOREVIEW
 //import serve_directory_listing from 'serve-index';
 //app.use('/ht', middleware.serve_directory_listing('../../client', {'icons': true}));
 
-// adds a X-Response-Time header to responses.
-// https://github.com/expressjs/response-time
-import response_time from 'response-time';
-
-// locale negotiation
-// https://github.com/jed/locale
-// TODO replace with a more clever one (handling facebook etc.)
-import locale from 'locale';
-
-// "express debug toolbar"
-// https://github.com/devoidfury/express-debug
-import express_debug from 'express-debug';
-
+// TOREVIEW
 //var method_unifier = require('method-override'); // https://github.com/expressjs/method-override
 
+// TOREVIEW
 //var bodyParser = require('body-parser'); // for, well, parsing body.
 // mainly useful for REST (POST, PUT)
 // https://github.com/expressjs/body-parser
 
-
+// TOREVIEW
 // https://github.com/ericf/express-slash
 
 import handle_errors from './error';
 import fallback_to_404 from './404';
 
-import logger from 'morgan';
+import logger from './logger';
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -67,12 +67,18 @@ function create(server, app) {
   // special tool ! If used
   // - will automatically attach itself as a middleware (!)
   // - require at last one existing middleware already set (!)
-  if(config.web.express_debug_enabled)
+  if(config.web.express_debug_enabled) {
+    // this bogus tools requires at last one middleware, so add an empty one :-(
+    app.use((req, res, next) => next());
     express_debug(app, { /* settings */ });
+  }
 
   ////////////////////////////////////
 
-  middlewares.log_requests = logger('dev'); // TODO
+  middlewares.identify_page_requests = function (req, res, next) {
+    req.is_page_request = is_page_request(req);
+    next();
+  };
 
   ////////////////////////////////////
 
@@ -92,7 +98,7 @@ function create(server, app) {
   }
 
   ////////////////////////////////////
-  middlewares.detect_best_locale = locale(
+  middlewares.detect_best_locale = locale_detector(
     app_infos.supported_locales,
     {
       //logger: logger
@@ -101,10 +107,8 @@ function create(server, app) {
 
   ////////////////////////////////////
 
+  middlewares.log_requests = logger;
   middlewares.serve_static_files = serve_static_files;
-
-  ////////////////////////////////////
-
   middlewares.add_response_time_header = response_time();
   middlewares.compress_response_body = compress_response_body();
   middlewares.assign_uuid = assign_uuid();

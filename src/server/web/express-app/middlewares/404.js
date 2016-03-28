@@ -1,16 +1,14 @@
-import is_page_request from '../../../incubator/is-page-request';
-
-// http://stackoverflow.com/questions/6528876/how-to-redirect-404-errors-to-a-page-in-expressjs
 // Several cases :
 // - a 404
 //   - manual, visible (user mistyped a page url, old address...)
 //   - internal (API, auto fetch of rsrc, non page-rsrc...)
 // - a correct page, but unknown from the server since will be resolved client-side by ui-router
+// http://stackoverflow.com/questions/6528876/how-to-redirect-404-errors-to-a-page-in-expressjs
 export default function handle_404 (req, res, next) {
   console.warn('fallback "catch all" route triggered for url "' + req.url + '"');
 
   // so what ?
-  if (! is_page_request(req)) {
+  if (! req.is_page_request) {
     // Will not be seen by the user.
     // Respond the best we can.
     res.status(404); // anyway
@@ -41,7 +39,13 @@ export default function handle_404 (req, res, next) {
   }
   else {
     console.error('! rendering 404 page for :', req.url);
-    return res.render('404', { tpl: '404', url: req.url, lang: req.locale });
+    return res.render('404', {
+      tpl: '404',
+      uuid: req.uuid,
+      url: req.url,
+      lang: req.locale
+    });
     // if rendering fail, will go to error handler.
+    // TODO test that...
   }
 }
