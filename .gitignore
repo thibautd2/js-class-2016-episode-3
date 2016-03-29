@@ -26,7 +26,7 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
-jspm_packages
+#jspm_packages
 #// nope, cause install is a pain due to GitHub rate limit. Do not do this at home, kids !
 bower_components
 

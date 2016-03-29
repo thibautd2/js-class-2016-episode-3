@@ -1,0 +1,1 @@
+module.exports = require("bower:labella@1.0.0/dist/labella.min.js");

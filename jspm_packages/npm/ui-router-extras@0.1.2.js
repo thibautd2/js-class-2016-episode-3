@@ -1,0 +1,1 @@
+module.exports = require("npm:ui-router-extras@0.1.2/release/ct-ui-router-extras");

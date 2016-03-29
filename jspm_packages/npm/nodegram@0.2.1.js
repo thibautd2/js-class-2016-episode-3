@@ -1,0 +1,1 @@
+module.exports = require("npm:nodegram@0.2.1/index.js");

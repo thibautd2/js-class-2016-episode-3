@@ -1,0 +1,1 @@
+module.exports = require("bower:d3@3.4.13/d3.js");

@@ -1,0 +1,53 @@
+{
+  "name": "labella",
+  "version": "1.0.0",
+  "authors": [
+    "Krist Wongsuphasawat <krist.wongz@gmail.com>"
+  ],
+  "description": "May the force label you",
+  "main": "dist/labella.min.js",
+  "license": "Apache-2.0",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "labella.js",
+    "labelling",
+    "visualization",
+    "javascript"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "package.json",
+    "src",
+    "node_modules",
+    "bower_components",
+    "karma.conf.js",
+    "Gruntfile.js",
+    "grunt",
+    "test",
+    "*.sublime-project",
+    "examples",
+    "docs"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.0",
+    "bootstrap": "~3.3.1",
+    "d3": "~3.4",
+    "d3kit": "~1.0.9"
+  },
+  "homepage": "https://github.com/twitter/labella.js",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "329b87b6648d3734667eaaef7d259e902e827f2b"
+  },
+  "_source": "git://github.com/twitter/labella.js.git",
+  "_target": "1.0.0",
+  "_originalSource": "git://github.com/twitter/labella.js.git",
+  "_direct": true
+}

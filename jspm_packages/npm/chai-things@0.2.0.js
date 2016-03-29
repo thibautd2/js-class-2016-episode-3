@@ -1,0 +1,1 @@
+module.exports = require("npm:chai-things@0.2.0/lib/chai-things.js");
