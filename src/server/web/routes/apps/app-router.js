@@ -26,13 +26,16 @@ export function create_app_router(app_radix, options) {
     // app radix, needed for some paths
     app_radix: app_radix,
 
-    // path to the appcache manifest file (relative to ?)
-    appcache_manifest: 'client/apps/' + app_radix + '/manifest.appcache',
-
+    main_script: 'client/' + app_radix + '/index',
+    
+    // path to the appcache manifest file (relative to ?) TODO
+    //appcache_manifest: 'client/apps/' + app_radix + '/manifest.appcache',
+    
     // path to the minified js TODO
     //minified_js: 'client/apps-minified/' + app_radix + '/all_js.concat+min.js',
 
-    favicons_path: '/client/apps/boringrpg/assets/favicons',
+    // TODO
+    //favicons_path: '/client/apps/boringrpg/assets/favicons',
 
     // analytics
     analytics_enabled: config.web.analytics.enabled,

@@ -10,7 +10,7 @@
 <script>
   window.define = System.amdDefine;
   window.require = window.requirejs = System.amdRequire;
-  System.import('client/landing/index');
+  System.import('{main_script}');
 </script>
 
 {/jsminification_enabled}

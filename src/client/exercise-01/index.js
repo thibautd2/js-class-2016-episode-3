@@ -1,31 +1,43 @@
-//console.log('loading landing app main js...');
 
 import 'angular';
 import 'angular-ui-router';
-import 'angular-aria';
-import 'angular-animate';
-import 'angular-messages';
-import 'angular-material';
-import 'angular-material/angular-material.css!';
-import 'angular-material/angular-material.layouts.css!';
 
-import app from 'client/common/incubator/ng-app-bootstrap';
+const appModule = angular.module('app_module', []);
 
-app.global_ng_module_dependencies = ['ui.router', 'ngAria', 'ngAnimate', 'ngMessages', 'ngMaterial'];
 
-//const ng_module = app.global_ng_module; // singleton : access cause creation
+appModule.controller('AppController', ['$scope', function ($scope) {
+  this.title = 'Exercise 01';
 
-// now that global module is ready, load ng modules
-
-window._app.global_ng_module.controller('AppController', ['$scope', function ($scope) {
-  //console.info('AppController…');
-
-  // TODO locale
-  this.title = window._app.server_title || 'SPA';
+  $scope.$watch(() => console.count('$digest'));
 }]);
 
-// use more convenient AMD syntax
-require([
-  'client/exercise-01/content',
-  'client/exercise-01/index.css!'
-], app.bootstrap);
+
+appModule.component('layout', {
+  templateUrl: 'client/exercise-01/layout.html'
+});
+
+appModule.controller('HelloController',
+  [function () {
+    this.names = [];
+
+    this.addName = function () {
+      this.names.push(this.name);
+      this.name = '';
+      console.log('added a name:', this);
+
+      // remove it after one second
+      ////////////////////////////////////////
+      // XXXX BAAAD NOT ANGULAR !!!!
+      // DON'T WORK !
+      // FIX ME !
+      setTimeout(() => this.names.shift(), 1000);
+      ////////////////////////////////////////
+    };
+  }]
+);
+
+// angular manual initialisation since we use a script loader
+console.log('* Bootstrapping angular...');
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['app_module'], {strictDi: true});
+});

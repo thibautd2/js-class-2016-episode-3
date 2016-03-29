@@ -30,19 +30,15 @@ import express_debug from 'express-debug';
 
 import is_page_request from '../../../incubator/is-page-request';
 
+// mainly useful for REST (POST, PUT)
+// https://github.com/expressjs/body-parser
+var body_parser = require('body-parser');
+
 // Serve directory listings
 // https://github.com/expressjs/serve-index
 // TOREVIEW
 //import serve_directory_listing from 'serve-index';
 //app.use('/ht', middleware.serve_directory_listing('../../client', {'icons': true}));
-
-// TOREVIEW
-//var method_unifier = require('method-override'); // https://github.com/expressjs/method-override
-
-// TOREVIEW
-//var bodyParser = require('body-parser'); // for, well, parsing body.
-// mainly useful for REST (POST, PUT)
-// https://github.com/expressjs/body-parser
 
 // TOREVIEW
 // https://github.com/ericf/express-slash
@@ -160,6 +156,7 @@ function create(server, app) {
   middlewares.log_requests = logger;
   middlewares.serve_static_files = serve_static_files;
   middlewares.add_response_time_header = response_time();
+  middlewares.parse_request = body_parser;
   middlewares.compress_response_body = compress_response_body();
   middlewares.assign_uuid = assign_uuid();
   middlewares.handle_errors = handle_errors;

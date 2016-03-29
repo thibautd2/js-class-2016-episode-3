@@ -1,0 +1,15 @@
+<div ng-controller="HelloController as $ctrl">
+
+  <form ng-submit="$ctrl.addName()">
+    <label>Name:</label>
+    <input type="text" placeholder="Enter a name here"
+           ng-model="$ctrl.name"
+           ng-model-options="{debounce: 250}">
+    <input class="btn-primary" type="submit" value="add">
+  </form>
+
+  <hr>
+
+  <h1 ng-repeat="name in $ctrl.names">Hello {{name}}!</h1>
+
+</div>

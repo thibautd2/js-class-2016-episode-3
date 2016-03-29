@@ -66,14 +66,15 @@ function init_app(server, app) {
   // add the X-Response-Time header to our responses
   app.use(middlewares.add_response_time_header);
 
+  // needed to read request params
+  app.use(middlewares.parse_request.json());
+  app.use(middlewares.parse_request.urlencoded({ extended: false }));
+
   // detect and pick the best locale
   app.use(middlewares.detect_best_locale);
 
-  //app.use(bodyParser.json());
-  //app.use(bodyParser.urlencoded());
-  
   /********************************** routes **************************************/
-  
+
   app.use(routes);
 
   // fallback
@@ -81,7 +82,7 @@ function init_app(server, app) {
   app.use(middlewares.handle_unmatched_with_404);
 
   /************************************************************************/
-  
+
   // error handling at the end
   // "Though not mandatory error-handling middleware are typically defined very last,
   //  below any other app.use() calls"

@@ -13,19 +13,12 @@ import app from 'client/common/incubator/ng-app-bootstrap';
 
 app.global_ng_module_dependencies = ['ui.router', 'ngAria', 'ngAnimate', 'ngMessages', 'ngMaterial'];
 
-// now that global module is ready, load ng modules
-
 window._app.global_ng_module.controller('AppController', ['$scope', function ($scope) {
-  //console.info('AppController…');
-
-  // TODO locale
-  this.title = window._app.server_title || 'SPA';
+  this.title = 'Exercise 01';
 }]);
 
 // use more convenient AMD syntax
 require([
-  'client/landing/lib/ng/components/layout',
-  'client/landing/lib/ng/routes/index',
-  'client/landing/index.css!',
-  'client/common/assets/fonts/material-icons.css!'
+  'client/exercise-01/content',
+  'client/exercise-01/index.css!'
 ], app.bootstrap);

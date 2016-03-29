@@ -1,17 +1,15 @@
 {>"layout/layout" /}
 
 {<inline_style}
-/* Only for loading style.
- * See index.css for definitive style.
- */
+    /* Only for loading style.
+    * See index.css for definitive style.
+    */
 {/inline_style}
 
 
 {<content}
+  {>"layout/jspm_bootstrap" /}
 
-	<div id="content" content-directive>
-	</div>
-
-	{>"layout/jspm_bootstrap" /}
+  <layout ng-cloak=""></layout>
 
 {/content}

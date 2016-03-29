@@ -51,8 +51,4 @@ server.on('request', (req, res) => {
 });
 
 // start the server
-server.listen(config.web.listening_port, function() {
-	console.log('* Now listening on :');
-  get_local_ips().forEach(ip => console.log('  http://' + ip + ':' + config.web.listening_port));
-	console.log('(Ctrl+C to stop)');
-});
+server.listen(config.web.listening_port);
