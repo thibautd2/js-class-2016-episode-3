@@ -3,6 +3,7 @@
 
 import http from 'http';
 
+import '../utils/logger-setup'; // first of first
 import '../utils/polyfill-intl';
 
 import express from 'express';
